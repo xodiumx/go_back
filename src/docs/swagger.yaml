@@ -13,7 +13,7 @@ info:
   title: Example API
   version: "1.0"
 paths:
-  /hello:
+  /api/v1/hello:
     get:
       consumes:
       - application/json
@@ -28,4 +28,60 @@ paths:
       summary: Получить приветствие
       tags:
       - example
+  /api/v1/key/{key}:
+    get:
+      consumes:
+      - application/json
+      description: Возвращает переданный ключ
+      parameters:
+      - description: Ключ
+        in: path
+        name: key
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Получить значение по ключу
+      tags:
+      - example
+  /api/v1/search:
+    get:
+      consumes:
+      - application/json
+      description: Возвращает результаты поиска по параметру "q" и отображает выбранную
+        страницу через параметр "page"
+      parameters:
+      - description: Поисковый запрос
+        in: query
+        name: q
+        type: string
+      - description: Номер страницы
+        in: query
+        name: page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Поиск по query-параметрам
+      tags:
+      - search
 swagger: "2.0"

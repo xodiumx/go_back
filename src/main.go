@@ -24,13 +24,21 @@ import (
 )
 
 func main() {
-	r := gin.Default()
+	router := gin.Default()
 
-	// Роуты
-	r.GET("/hello", api.HelloHandler)
+	base := router.Group("/api")
+	{
+		v1 := base.Group("/v1") // Вложенная группа для версии API
+		{
+			// Роуты
+			v1.GET("/hello", api.HelloHandler)
+			v1.GET("/key/:key", api.GetHandler)
+			v1.GET("/search", api.SearchHandler)
+		}
+	}
 
 	// Подключаем Swagger UI
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(files.Handler))
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(files.Handler))
 
-	r.Run(":8080") // Запускаем сервер
+	router.Run(":8080") // Запускаем сервер
 }

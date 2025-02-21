@@ -24,7 +24,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/hello": {
+        "/api/v1/hello": {
             "get": {
                 "description": "Возвращает сообщение \"Hello, World!\"",
                 "consumes": [
@@ -42,6 +42,90 @@ const docTemplate = `{
                         "description": "Hello, World!",
                         "schema": {
                             "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/key/{key}": {
+            "get": {
+                "description": "Возвращает переданный ключ",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "example"
+                ],
+                "summary": "Получить значение по ключу",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Ключ",
+                        "name": "key",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/search": {
+            "get": {
+                "description": "Возвращает результаты поиска по параметру \"q\" и отображает выбранную страницу через параметр \"page\"",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "search"
+                ],
+                "summary": "Поиск по query-параметрам",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Поисковый запрос",
+                        "name": "q",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Номер страницы",
+                        "name": "page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
                         }
                     }
                 }
