@@ -24,6 +24,53 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/api/v1/create": {
+            "post": {
+                "description": "Создает новый объект, принимая JSON в теле запроса",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "create"
+                ],
+                "summary": "Создать новый объект",
+                "parameters": [
+                    {
+                        "description": "Тело запроса",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/hello": {
             "get": {
                 "description": "Возвращает сообщение \"Hello, World!\"",
@@ -36,7 +83,6 @@ const docTemplate = `{
                 "tags": [
                     "example"
                 ],
-                "summary": "Получить приветствие",
                 "responses": {
                     "200": {
                         "description": "Hello, World!",

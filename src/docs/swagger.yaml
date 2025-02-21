@@ -13,6 +13,37 @@ info:
   title: Example API
   version: "1.0"
 paths:
+  /api/v1/create:
+    post:
+      consumes:
+      - application/json
+      description: Создает новый объект, принимая JSON в теле запроса
+      parameters:
+      - description: Тело запроса
+        in: body
+        name: body
+        required: true
+        schema:
+          additionalProperties: true
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Создать новый объект
+      tags:
+      - create
   /api/v1/hello:
     get:
       consumes:
@@ -25,7 +56,6 @@ paths:
           description: Hello, World!
           schema:
             type: string
-      summary: Получить приветствие
       tags:
       - example
   /api/v1/key/{key}:

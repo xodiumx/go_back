@@ -34,6 +34,9 @@ func main() {
 			v1.GET("/hello", api.HelloHandler)
 			v1.GET("/key/:key", api.GetHandler)
 			v1.GET("/search", api.SearchHandler)
+			v1.POST("/create", api.CreateHandler)
+			v1.GET("/hand1", api.Handler1)
+			v1.GET("/hand2", api.Handler2)
 		}
 	}
 

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"time"
 )
 
 // HelloHandler @Summary      Получить приветствие
@@ -55,4 +56,40 @@ func SearchHandler(c *gin.Context) {
 		"query": query,
 		"page":  page,
 	})
+}
+
+// CreateHandler - обработчик для /v1/create
+// @Summary Создать новый объект
+// @Description Создает новый объект, принимая JSON в теле запроса
+// @Tags create
+// @Accept  json
+// @Produce json
+// @Param body body map[string]interface{} true "Тело запроса"
+// @Success 200 {object} map[string]string
+// @Failure 400 {object} map[string]string
+// @Router /api/v1/create [post]
+func CreateHandler(c *gin.Context) {
+	var body map[string]interface{} // Структура для тела запроса
+
+	// Связываем тело запроса с переменной
+	if err := c.ShouldBindJSON(&body); err != nil {
+		// Если произошла ошибка при парсинге JSON
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	// Ответ с принятым JSON
+	c.JSON(http.StatusOK, gin.H{
+		"received": body,
+	})
+}
+
+// TEST async
+func Handler1(c *gin.Context) {
+	time.Sleep(10 * time.Second) // Симуляция длительной операции
+	c.JSON(200, gin.H{"message": "handler 1 completed after 10 seconds"})
+}
+func Handler2(c *gin.Context) {
+	time.Sleep(1 * time.Second) // Симуляция длительной операции
+	c.JSON(200, gin.H{"message": "handler 2 completed after 1 second"})
 }
