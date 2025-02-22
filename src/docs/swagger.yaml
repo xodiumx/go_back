@@ -1,4 +1,31 @@
 basePath: /
+definitions:
+  api.BadRequest:
+    properties:
+      detail:
+        $ref: '#/definitions/api.Message'
+    type: object
+  api.Message:
+    properties:
+      message:
+        example: Some message
+        type: string
+      status:
+        example: not ok
+        type: string
+    type: object
+  api.UserResponse:
+    properties:
+      email:
+        example: john.doe@example.com
+        type: string
+      id:
+        example: 1
+        type: integer
+      name:
+        example: John Doe
+        type: string
+    type: object
 host: localhost:8080
 info:
   contact:
@@ -114,4 +141,29 @@ paths:
       summary: Поиск по query-параметрам
       tags:
       - search
+  /api/v1/users/{id}:
+    get:
+      consumes:
+      - application/json
+      description: description
+      parameters:
+      - description: ID пользователя
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.UserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.BadRequest'
+      summary: Ручка с указанной схемой
+      tags:
+      - with_schema
 swagger: "2.0"

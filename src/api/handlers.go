@@ -93,3 +93,22 @@ func Handler2(c *gin.Context) {
 	time.Sleep(1 * time.Second) // Симуляция длительной операции
 	c.JSON(200, gin.H{"message": "handler 2 completed after 1 second"})
 }
+
+// GetUserHandlerWithSchema - Ручка со схемой
+// @Summary Ручка с указанной схемой
+// @Description description
+// @Tags with_schema
+// @Accept  json
+// @Produce json
+// @Param id path int true "ID пользователя"
+// @Success 200 {object} UserResponse
+// @Failure 400 {object} BadRequest
+// @Router /api/v1/users/{id} [get]
+func GetUserHandlerWithSchema(c *gin.Context) {
+	user := UserResponse{
+		ID:    1,
+		Name:  "John Doe",
+		Email: "john.doe@example.com",
+	}
+	c.JSON(http.StatusOK, user)
+}

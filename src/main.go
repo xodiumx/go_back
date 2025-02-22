@@ -38,6 +38,7 @@ func main() {
 			v1.POST("/create", api.CreateHandler)
 			v1.GET("/hand1", api.Handler1)
 			v1.GET("/hand2", api.Handler2)
+			v1.GET("/users/:id", api.GetUserHandlerWithSchema)
 		}
 	}
 

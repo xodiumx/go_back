@@ -170,6 +170,84 @@
                     }
                 }
             }
+        },
+        "/api/v1/users/{id}": {
+            "get": {
+                "description": "description",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "with_schema"
+                ],
+                "summary": "Ручка с указанной схемой",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID пользователя",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.UserResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/api.BadRequest"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "api.BadRequest": {
+            "type": "object",
+            "properties": {
+                "detail": {
+                    "$ref": "#/definitions/api.Message"
+                }
+            }
+        },
+        "api.Message": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "example": "Some message"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "not ok"
+                }
+            }
+        },
+        "api.UserResponse": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "example": "john.doe@example.com"
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "name": {
+                    "type": "string",
+                    "example": "John Doe"
+                }
+            }
         }
     }
 }
