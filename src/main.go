@@ -19,8 +19,9 @@ import (
 	"github.com/gin-gonic/gin"
 	files "github.com/swaggo/files"
 	"github.com/swaggo/gin-swagger"
-	"stress/src/api"
-	_ "stress/src/docs"
+	"log"
+	"stress/api"
+	_ "stress/docs"
 )
 
 func main() {
@@ -43,5 +44,5 @@ func main() {
 	// Подключаем Swagger UI
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(files.Handler))
 
-	router.Run(":8080") // Запускаем сервер
+	log.Fatal(router.Run(":8080"))
 }
