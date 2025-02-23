@@ -22,9 +22,11 @@ import (
 	"log"
 	"stress/api"
 	_ "stress/docs"
+	_ "stress/settings"
 )
 
 func main() {
+
 	router := gin.Default()
 
 	base := router.Group("/api")
