@@ -12,7 +12,7 @@ services:
   db:
     container_name: db
     build:
-       dockerfile: ./docker/postgres/Dockerfile
+       dockerfile: ./dev/docker/postgres/Dockerfile
        context: .
     volumes:
       - db_volume:/var/lib/postgresql/data/
