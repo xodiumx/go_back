@@ -1,6 +1,6 @@
 // @title           Example API
 // @version         1.0
-// @description     Это тестовый сервер Swagger для Gin.
+// @description     Test Swagger for Gin.
 // @termsOfService  http://swagger.io/terms/
 
 // @contact.name   API Support
@@ -31,20 +31,23 @@ func main() {
 
 	base := router.Group("/api")
 	{
-		v1 := base.Group("/v1") // Вложенная группа для версии API
+		v1 := base.Group("/v1")
 		{
-			// Роуты
+			// Routes
 			v1.GET("/hello", api.HelloHandler)
 			v1.GET("/key/:key", api.GetHandler)
 			v1.GET("/search", api.SearchHandler)
 			v1.POST("/create", api.CreateHandler)
-			v1.GET("/hand1", api.Handler1)
-			v1.GET("/hand2", api.Handler2)
-			v1.GET("/users/:id", api.GetUserHandlerWithSchema)
+		}
+		v2 := base.Group("/v2")
+		{
+			v2.GET("/hand1", api.Handler1)
+			v2.GET("/hand2", api.Handler2)
+			v2.GET("/users/:id", api.GetUserHandlerWithSchema)
 		}
 	}
 
-	// Подключаем Swagger UI
+	// Swagger on
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(files.Handler))
 
 	log.Fatal(router.Run(":8080"))

@@ -26,7 +26,7 @@ const docTemplate = `{
     "paths": {
         "/api/v1/create": {
             "post": {
-                "description": "Создает новый объект, принимая JSON в теле запроса",
+                "description": "Received json body",
                 "consumes": [
                     "application/json"
                 ],
@@ -36,10 +36,10 @@ const docTemplate = `{
                 "tags": [
                     "create"
                 ],
-                "summary": "Создать новый объект",
+                "summary": "Data from body",
                 "parameters": [
                     {
-                        "description": "Тело запроса",
+                        "description": "Body",
                         "name": "body",
                         "in": "body",
                         "required": true,
@@ -73,7 +73,7 @@ const docTemplate = `{
         },
         "/api/v1/hello": {
             "get": {
-                "description": "Возвращает сообщение \"Hello, World!\"",
+                "description": "Returns \"Hello, World!\"",
                 "consumes": [
                     "application/json"
                 ],
@@ -95,7 +95,7 @@ const docTemplate = `{
         },
         "/api/v1/key/{key}": {
             "get": {
-                "description": "Возвращает переданный ключ",
+                "description": "Return key from path param",
                 "consumes": [
                     "application/json"
                 ],
@@ -105,11 +105,11 @@ const docTemplate = `{
                 "tags": [
                     "example"
                 ],
-                "summary": "Получить значение по ключу",
+                "summary": "Get key from path param",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Ключ",
+                        "description": "Key",
                         "name": "key",
                         "in": "path",
                         "required": true
@@ -130,7 +130,7 @@ const docTemplate = `{
         },
         "/api/v1/search": {
             "get": {
-                "description": "Возвращает результаты поиска по параметру \"q\" и отображает выбранную страницу через параметр \"page\"",
+                "description": "Get \"q\" and \"page\" query params",
                 "consumes": [
                     "application/json"
                 ],
@@ -140,17 +140,17 @@ const docTemplate = `{
                 "tags": [
                     "search"
                 ],
-                "summary": "Поиск по query-параметрам",
+                "summary": "Get query params",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Поисковый запрос",
+                        "description": "Search query",
                         "name": "q",
                         "in": "query"
                     },
                     {
                         "type": "integer",
-                        "description": "Номер страницы",
+                        "description": "Pagination",
                         "name": "page",
                         "in": "query"
                     }
@@ -177,7 +177,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/users/{id}": {
+        "/api/v2/users/{id}": {
             "get": {
                 "description": "description",
                 "consumes": [
@@ -189,11 +189,11 @@ const docTemplate = `{
                 "tags": [
                     "with_schema"
                 ],
-                "summary": "Ручка с указанной схемой",
+                "summary": "Endpoint with schema",
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "ID пользователя",
+                        "description": "User id",
                         "name": "id",
                         "in": "path",
                         "required": true
@@ -265,7 +265,7 @@ var SwaggerInfo = &swag.Spec{
 	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "Example API",
-	Description:      "Это тестовый сервер Swagger для Gin.",
+	Description:      "Test Swagger for Gin.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

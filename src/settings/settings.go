@@ -21,37 +21,38 @@ type Config struct {
 
 var Conf Config
 
-// InitConfig инициализирует глобальную переменную конфигурации
+// InitConfig initialize global config
 func InitConfig() {
 
-	// Загружает переменные из .env в окружение
+	// Load env vars from .env to environment
 	if err := godotenv.Load(); err != nil {
-		log.Println("Ошибка загрузки .env файла, продолжаем использовать только переменные окружения")
+		log.Println("Error in load .env file")
 	}
 
-	// Проверка, что переменные загружены в окружение
+	// Check env var in environment
 	fmt.Println("Loaded in env ", os.Getenv("DB_HOST"))
 
-	viper.AutomaticEnv() // Автоматически загружает переменные окружения
+	viper.AutomaticEnv() // Use environment for settings
 
-	// Устанавливаем значения по умолчанию
+	// Can set default value
 	viper.SetDefault("FROM_CONFIG_FILE", false)
 
-	// Пробуем прочитать конфиг из файла (если есть)
-	viper.SetConfigName("config")     // Имя файла без расширения
-	viper.SetConfigType("yaml")       // Формат файла
-	viper.AddConfigPath("./settings") // Каталог для поиска файла
+	// Trying load config from config file
+	viper.SetConfigName("config")     // Name
+	viper.SetConfigType("yaml")       // Ext
+	viper.AddConfigPath("./settings") // Path
 
 	if err := viper.ReadInConfig(); err == nil {
-		log.Printf("Используется конфигурационный файл: %s", viper.ConfigFileUsed())
+		log.Printf("Сonfiguration file is set: %s", viper.ConfigFileUsed())
 	} else {
-		log.Println("Файл конфигурации не найден, используются только ENV переменные")
+		log.Println("Config file not found")
 	}
 
-	// Маппинг переменных в структуру
+	// Deserialize environment in config
 	if err := viper.Unmarshal(&Conf); err != nil {
-		log.Fatalf("Ошибка загрузки конфигурации: %v", err)
+		log.Fatalf("Deserialize failed: %v", err)
 	} else {
+		// Check Conf
 		fmt.Println("Config type ", Conf.FromConfigFile)
 		fmt.Println("Host ", Conf.DB.Host)
 		fmt.Println("Port ", Conf.DB.Port)

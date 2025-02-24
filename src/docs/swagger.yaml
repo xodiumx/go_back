@@ -32,7 +32,7 @@ info:
     email: support@example.com
     name: API Support
     url: http://www.example.com/support
-  description: Это тестовый сервер Swagger для Gin.
+  description: Test Swagger for Gin.
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
@@ -44,9 +44,9 @@ paths:
     post:
       consumes:
       - application/json
-      description: Создает новый объект, принимая JSON в теле запроса
+      description: Received json body
       parameters:
-      - description: Тело запроса
+      - description: Body
         in: body
         name: body
         required: true
@@ -68,14 +68,14 @@ paths:
             additionalProperties:
               type: string
             type: object
-      summary: Создать новый объект
+      summary: Data from body
       tags:
       - create
   /api/v1/hello:
     get:
       consumes:
       - application/json
-      description: Возвращает сообщение "Hello, World!"
+      description: Returns "Hello, World!"
       produces:
       - application/json
       responses:
@@ -89,9 +89,9 @@ paths:
     get:
       consumes:
       - application/json
-      description: Возвращает переданный ключ
+      description: Return key from path param
       parameters:
-      - description: Ключ
+      - description: Key
         in: path
         name: key
         required: true
@@ -105,21 +105,20 @@ paths:
             additionalProperties:
               type: string
             type: object
-      summary: Получить значение по ключу
+      summary: Get key from path param
       tags:
       - example
   /api/v1/search:
     get:
       consumes:
       - application/json
-      description: Возвращает результаты поиска по параметру "q" и отображает выбранную
-        страницу через параметр "page"
+      description: Get "q" and "page" query params
       parameters:
-      - description: Поисковый запрос
+      - description: Search query
         in: query
         name: q
         type: string
-      - description: Номер страницы
+      - description: Pagination
         in: query
         name: page
         type: integer
@@ -138,16 +137,16 @@ paths:
             additionalProperties:
               type: string
             type: object
-      summary: Поиск по query-параметрам
+      summary: Get query params
       tags:
       - search
-  /api/v1/users/{id}:
+  /api/v2/users/{id}:
     get:
       consumes:
       - application/json
       description: description
       parameters:
-      - description: ID пользователя
+      - description: User id
         in: path
         name: id
         required: true
@@ -163,7 +162,7 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/api.BadRequest'
-      summary: Ручка с указанной схемой
+      summary: Endpoint with schema
       tags:
       - with_schema
 swagger: "2.0"
