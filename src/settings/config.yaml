@@ -1,5 +1,7 @@
 FROM_CONFIG_FILE: true
 
+GIN_MODE: release
+
 DB_HOST: "db"
 DB_PORT: 5432
 DB_USER: "postgres"

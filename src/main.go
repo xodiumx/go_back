@@ -19,16 +19,26 @@ import (
 	"github.com/gin-gonic/gin"
 	files "github.com/swaggo/files"
 	"github.com/swaggo/gin-swagger"
+	"go_back/api"
+	_ "go_back/docs"
+	"go_back/logs"
+	"go_back/middlewares"
+	_ "go_back/settings"
 	"log"
-	"stress/api"
-	_ "stress/docs"
-	_ "stress/settings"
 )
 
 func main() {
 
-	router := gin.Default()
+	// Initialize logger
+	logs.InitLogger()
+	defer logs.CloseLogger()
 
+	// Initialize app
+	router := gin.New()
+	router.Use(gin.Recovery())
+	router.Use(middlewares.ZapLoggerMiddleware(logs.Logger))
+
+	// Setup router
 	base := router.Group("/api")
 	{
 		v1 := base.Group("/v1")

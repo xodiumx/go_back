@@ -9,7 +9,8 @@ import (
 )
 
 type Config struct {
-	FromConfigFile bool `mapstructure:"FROM_CONFIG_FILE"`
+	FromConfigFile bool   `mapstructure:"FROM_CONFIG_FILE"`
+	GinMode        string `mapstructure:"GIN_MODE"` // setup before run
 	DB             struct {
 		Host     string `mapstructure:"DB_HOST"`
 		Port     int    `mapstructure:"DB_PORT"`
@@ -53,6 +54,7 @@ func InitConfig() {
 		log.Fatalf("Deserialize failed: %v", err)
 	} else {
 		// Check Conf
+		fmt.Println("GinMode ", Conf.GinMode)
 		fmt.Println("Config type ", Conf.FromConfigFile)
 		fmt.Println("Host ", Conf.DB.Host)
 		fmt.Println("Port ", Conf.DB.Port)
