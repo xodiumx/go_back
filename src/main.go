@@ -19,11 +19,11 @@ import (
 	"github.com/gin-gonic/gin"
 	files "github.com/swaggo/files"
 	"github.com/swaggo/gin-swagger"
-	"go_back/api"
-	_ "go_back/docs"
-	"go_back/logs"
-	"go_back/middlewares"
-	_ "go_back/settings"
+	"github.com/xodiumx/go_back/api"
+	_ "github.com/xodiumx/go_back/docs"
+	"github.com/xodiumx/go_back/logs"
+	"github.com/xodiumx/go_back/middlewares"
+	_ "github.com/xodiumx/go_back/settings"
 	"log"
 )
 
